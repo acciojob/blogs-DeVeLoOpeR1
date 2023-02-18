@@ -13,8 +13,8 @@ import java.util.List;
 @RequestMapping("/blogs")
 public class BlogController {
 
-    @Autowired
-    BlogService blogService;
+
+    BlogService blogService = new BlogService();
 
     @PostMapping("/create")
     public ResponseEntity createBlog(@RequestParam Integer userId ,
