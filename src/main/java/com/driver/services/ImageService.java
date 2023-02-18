@@ -53,31 +53,65 @@ public class ImageService {
     public int countImagesInScreen(Integer id, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
 
-        Image image;
+        Image images;
         try {
-            image = imageRepository2.findById(id).get();
+            images = imageRepository2.findById(id).get();
         } catch (Exception e) {
             e.getMessage();
             return 0;
         }
+        String image = images.getDimensions();
+
+
+        if(image.length()==0||screenDimensions.length()==0)
+            return 0;
 
 
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
         int count;
-        int screenX = Integer.parseInt(String.valueOf(screenDimensions.charAt(0)));
-        int screenY = Integer.parseInt(String.valueOf(screenDimensions.charAt(2)));
-        int screenXY = screenX * screenY; //4*4 = 16
+        int screenX;
+        int screenY;
+        int screenXY=0;
+        int imageX;
+        int imageY;
+        int imageXY=0;
 
-        int imageX = Integer.parseInt(String.valueOf(image.getDimensions().charAt(0)));
-        int imageY = Integer.parseInt(String.valueOf(image.getDimensions().charAt(2)));
-        int imageXY = imageX * imageY; // 2*2 = 4
+        if(screenDimensions.length()<=3){
 
-        if(screenXY ==0 || imageXY==0)
+
+            screenX = Integer.parseInt(String.valueOf(screenDimensions.charAt(0)));
+            screenY = Integer.parseInt(String.valueOf(screenDimensions.charAt(2)));
+            screenXY = screenX * screenY; //4*4 = 16
+
+        }
+        else{ //two digit data
+            screenX = Integer.parseInt(screenDimensions.substring(0,2));
+            screenY = Integer.parseInt(screenDimensions.substring(3));
+            screenXY = screenX * screenY;
+
+        }
+
+
+        if(image.length()<=3){
+            imageX = Integer.parseInt(String.valueOf(image.charAt(0)));
+            imageY = Integer.parseInt(String.valueOf(image.charAt(2)));
+            imageXY = imageX * imageY; // 2*2 = 4
+        }
+        else{
+
+            screenX = Integer.parseInt(image.substring(0,2));
+            screenY = Integer.parseInt(image.substring(3));
+            screenXY = screenX * screenY;
+        }
+
+        if(screenXY == 0 || imageXY ==0)
         {
             return 0;
         }
 
-            count = screenXY / imageXY;
+        count = screenXY / imageXY;
         return count;
+
+
     }
 }
