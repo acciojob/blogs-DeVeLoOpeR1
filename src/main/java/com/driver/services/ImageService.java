@@ -85,8 +85,8 @@ public class ImageService {
 
         }
         else{ //two digit data
-            screenX = Integer.parseInt(screenDimensions.substring(0,2));
-            screenY = Integer.parseInt(screenDimensions.substring(3));
+            screenX = Integer.parseInt(screenDimensions.substring(0,3));
+            screenY = Integer.parseInt(screenDimensions.substring(4));
             screenXY = screenX * screenY;
 
         }
@@ -99,8 +99,8 @@ public class ImageService {
         }
         else{
 
-            screenX = Integer.parseInt(image.substring(0,2));
-            screenY = Integer.parseInt(image.substring(3));
+            screenX = Integer.parseInt(image.substring(0,3));
+            screenY = Integer.parseInt(image.substring(4));
             screenXY = screenX * screenY;
         }
 
