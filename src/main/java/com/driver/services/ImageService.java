@@ -53,65 +53,29 @@ public class ImageService {
     public int countImagesInScreen(Integer id, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
 
-        Image images;
-        try {
-            images = imageRepository2.findById(id).get();
-        } catch (Exception e) {
-            e.getMessage();
-            return 0;
-        }
-        String image = images.getDimensions();
-
-
-        if(image.length()==0||screenDimensions.length()==0)
-            return 0;
-
-
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
-        int count;
-        int screenX;
-        int screenY;
-        int screenXY=0;
-        int imageX;
-        int imageY;
-        int imageXY=0;
 
-        if(screenDimensions.length()<=3){
+        String [] screen_Array = screenDimensions.split("X");
+        Image image = imageRepository2.findById(id).get();
 
+        String imageDimension = image.getDimensions();
+        String [] image_Array = imageDimension.split("X");
 
-            screenX = Integer.parseInt(String.valueOf(screenDimensions.charAt(0)));
-            screenY = Integer.parseInt(String.valueOf(screenDimensions.charAt(2)));
-            screenXY = screenX * screenY; //4*4 = 16
+        int screen_length = Integer.parseInt(screen_Array[0]);
+        int screen_breadth = Integer.parseInt(screen_Array[1]);
 
-        }
-        else{ //two digit data
-            screenX = Integer.parseInt(screenDimensions.substring(0,3));
-            screenY = Integer.parseInt(screenDimensions.substring(4));
-            screenXY = screenX * screenY;
+        int image_length = Integer.parseInt(image_Array[0]);
+        int image_breadth = Integer.parseInt(image_Array[1]);
 
-        }
-
-
-        if(image.length()<=3){
-            imageX = Integer.parseInt(String.valueOf(image.charAt(0)));
-            imageY = Integer.parseInt(String.valueOf(image.charAt(2)));
-            imageXY = imageX * imageY; // 2*2 = 4
-        }
-        else{
-
-            screenX = Integer.parseInt(image.substring(0,3));
-            screenY = Integer.parseInt(image.substring(4));
-            screenXY = screenX * screenY;
-        }
-
-        if(screenXY == 0 || imageXY ==0)
-        {
-            return 0;
-        }
-
-        count = screenXY / imageXY;
-        return count;
-
-
+        return  numberOfImages( screen_length,screen_breadth,image_length, image_breadth);
     }
+
+    public int numberOfImages ( int screen_length,int screen_breadth,int image_length,int image_breadth){
+        int len1 = screen_length/image_length;
+        int len2 = screen_breadth/image_breadth;
+
+        return len1*len2;
+    }
+
+
 }
