@@ -19,11 +19,7 @@ public class BlogService {
         //create a blog at the current time
 
         User user = userRepository1.findById(userId).get();
-
-        Blog blog = new Blog();
-        blog.setUser(user);
-        blog.setTitle(title);
-        blog.setContent(content);
+        Blog blog = new Blog(user,title,content);
 
         // here we are saving the userRepository and due to cascading effect the child (blog) will be automatically saved
         userRepository1.save(user);
