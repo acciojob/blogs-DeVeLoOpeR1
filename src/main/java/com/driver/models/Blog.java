@@ -31,6 +31,8 @@ public class Blog{
     @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
     private List<Image> imageList = new ArrayList<Image>();
 
+    public Blog() {
+    }
 
     public Blog(int id, String title, String content, Date pubDate, User user, List<Image> imageList) {
         this.id = id;
