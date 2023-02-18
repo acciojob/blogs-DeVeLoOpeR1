@@ -17,29 +17,32 @@ public class BlogService {
 
     public Blog createAndReturnBlog(Integer userId, String title, String content) {
         //create a blog at the current time
+
+        User user = userRepository1.findById(userId).get();
+
         Blog blog = new Blog();
-
-        //updating the blog details
-
+        blog.setUser(user);
         blog.setTitle(title);
         blog.setContent(content);
-        User user;
-        try{
-            user = userRepository1.findById(userId).get();
-        }
-        catch(Exception e){
-            e.getMessage();
-            return null;
-        }
-        blog.setUser(user);
 
-        //Updating the userInformation and changing its blogs
-        user.getBlogList().add(blog);
-
+        // here we are saving the userRepository and due to cascading effect the child (blog) will be automatically saved
         userRepository1.save(user);
 
-        return blog;
 
+
+//        //setting the blog attributes
+//        blog.setUser(user);
+//        blog.setTitle(title);
+//        blog.setContent(content);
+//        blog.setPubDate(new Date());
+
+        //updating the blog list info of user also
+//        List<Blog> currentBLogs = user.getBlogList();
+//        currentBLogs.add(blog);
+//        user.setBlogList(currentBLogs);
+
+        user.getBlogList().add(blog);
+        return blog;
     }
 
     public void deleteBlog(int blogId){
