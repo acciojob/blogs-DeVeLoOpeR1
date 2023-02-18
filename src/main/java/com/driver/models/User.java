@@ -14,7 +14,7 @@ public class User {
     private int id;
 
     @Column(unique = true)
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -24,7 +24,7 @@ public class User {
 
     // for bidirectional mapping of the user and blog
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Blog> blog = new ArrayList<>();
+    private List<Blog> blogList = new ArrayList<>();
 
     public User() {
     }
@@ -37,13 +37,7 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getPassword() {
         return password;
@@ -69,11 +63,19 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Blog> getBlog() {
-        return blog;
+    public String getUsername() {
+        return username;
     }
 
-    public void setBlog(List<Blog> blog) {
-        this.blog = blog;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<Blog> getBlogList() {
+        return blogList;
+    }
+
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
     }
 }

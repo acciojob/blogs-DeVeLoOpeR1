@@ -17,7 +17,7 @@ public class ImageService {
         //add an image to the blog
         Image image = new Image();
         image.setDescription(description);
-        image.setDimension(dimensions);
+        image.setDimensions(dimensions);
         Blog blog;
         try{
             blog = blogRepository2.findById(blogId).get();
@@ -71,8 +71,8 @@ public class ImageService {
         int screenY = Integer.parseInt(String.valueOf(screenDimensions.charAt(2)));
         int screenXY = screenX * screenY; //4*4 = 16
 
-        int imageX = Integer.parseInt(String.valueOf(image.getDimension().charAt(0)));
-        int imageY = Integer.parseInt(String.valueOf(image.getDimension().charAt(2)));
+        int imageX = Integer.parseInt(String.valueOf(image.getDimensions().charAt(0)));
+        int imageY = Integer.parseInt(String.valueOf(image.getDimensions().charAt(2)));
         int imageXY = imageX * imageY; // 2*2 = 4
 
         count  = screenXY / imageXY;

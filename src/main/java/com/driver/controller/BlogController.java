@@ -14,7 +14,8 @@ import java.util.List;
 public class BlogController {
 
 
-    BlogService blogService = new BlogService();
+    @Autowired
+    BlogService blogService;
 
     @PostMapping("/create")
     public ResponseEntity createBlog(@RequestParam Integer userId ,
