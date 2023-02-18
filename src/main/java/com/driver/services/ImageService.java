@@ -60,8 +60,7 @@ public class ImageService {
             e.getMessage();
             return 0;
         }
-        if (image.equals(null) && screenDimensions.equals(null))
-            return 0;
+
 
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
         int count;
@@ -73,12 +72,12 @@ public class ImageService {
         int imageY = Integer.parseInt(String.valueOf(image.getDimensions().charAt(2)));
         int imageXY = imageX * imageY; // 2*2 = 4
 
-        try {
-            count = screenXY / imageXY;
-        } catch (Exception e){
-            e.getMessage();
+        if(screenXY ==0 || imageXY==0)
+        {
             return 0;
         }
+
+            count = screenXY / imageXY;
         return count;
     }
 }

@@ -29,7 +29,7 @@ public class BlogService {
         }
         catch(Exception e){
             e.getMessage();
-            return new Blog();
+            return null;
         }
         blog.setUser(user);
 

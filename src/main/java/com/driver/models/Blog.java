@@ -29,7 +29,7 @@ public class Blog{
 
     // For bidirectional mapping of the blog and image
     @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
-    private List<Image> imageList = new ArrayList<>();
+    private List<Image> imageList = new ArrayList<Image>();
 
     public Blog() {
     }

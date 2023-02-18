@@ -24,7 +24,7 @@ public class User {
 
     // for bidirectional mapping of the user and blog
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Blog> blogList = new ArrayList<>();
+    private List<Blog> blogList = new ArrayList<Blog>();
 
     public User() {
     }
