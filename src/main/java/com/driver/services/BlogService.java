@@ -7,6 +7,8 @@ import com.driver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class BlogService {
     @Autowired
@@ -20,6 +22,7 @@ public class BlogService {
 
         User user = userRepository1.findById(userId).get();
         Blog blog = new Blog(user,title,content);
+        blog.setPubDate(new Date());
 
         // here we are saving the userRepository and due to cascading effect the child (blog) will be automatically saved
         userRepository1.save(user);
