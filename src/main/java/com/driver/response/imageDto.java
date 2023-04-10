@@ -1,26 +1,16 @@
+package com.driver.response;
 
-package com.driver.models;
+public class imageDto {
 
-import javax.persistence.*;
-@Entity
-@Table(name = "image")
-public class Image {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String description;
 
     private String dimension;
 
-    // A blog may contain multiple images at a time
-    @ManyToOne
-    @JoinColumn
-    private Blog blog;
+    private int blogId;
 
-    public Image()
-    {
-
+    public imageDto() {
     }
 
     public int getId() {
@@ -47,11 +37,11 @@ public class Image {
         this.dimension = dimension;
     }
 
-    public Blog getBlog() {
-        return blog;
+    public int getBlogId() {
+        return blogId;
     }
 
-    public void setBlog(Blog blog) {
-        this.blog = blog;
+    public void setBlogId(int blogId) {
+        this.blogId = blogId;
     }
 }
